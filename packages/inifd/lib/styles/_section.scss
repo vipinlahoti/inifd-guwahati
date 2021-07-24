@@ -1,0 +1,166 @@
+.section {
+  @include padding(120px 0);
+  overflow: hidden;
+}
+
+.section-lg {
+  @include padding(160px 0); 
+}
+
+.section-medium {
+  @include padding(64px 0);  
+}
+
+.section-small {
+  @include padding(32px 0);
+  height: auto;
+}
+
+.section-xsmall {
+  @include padding(16px 0);
+  height: auto;
+}
+
+.section-split {
+  color: $white;
+  position: relative;
+
+  &:before {
+    background: $primary;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    z-index: -1;
+
+    @media only screen and (min-width: $screen-md) {
+      width: 70%;
+    }
+  }
+}
+
+.section-diagonal {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  display: block;
+  left: 0;
+  top: -250px;
+  background-color: $primary;
+  transform: skewY(-10deg);
+  @include height(650px);
+}
+
+.section-gray {
+  background: $gray-100;
+}
+
+.section-locations {
+  @include padding(80px, top);
+  position: relative;
+  height: 470px;
+
+  &:before {
+    background: url('/images/world-map.png') no-repeat 100% center;
+    content:'';
+    background-size: cover;
+    opacity: .25;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+.section-distributions {
+  @include padding(16px);
+}
+
+.section-profile-complete {
+  .navbar-brand {
+    @include padding(0);
+    color: $dark;
+  }
+}
+
+.section-stripe {
+  // background-image: url('/images/triangles-background.png');
+  // background-position: fixed;
+}
+
+.dashboard__wrapper {
+  @include breakpoint($screen-md) {
+    @include margin(220px, left);
+  }
+}
+
+.section-dashboard {
+  @include padding(24px 32px);
+  min-height: calc(100vh - 128px);
+  width: 100%;
+
+  @include breakpoint($screen-md) {
+    @include padding(32px 32px 96px);
+  }
+
+  .container {
+    // @include width(1200px, max);
+  }
+
+  .form-input,
+  .accounts-ui {
+    // @include width(450px, max); 
+  }
+}
+
+
+.diagonal-bg {
+  position: relative;
+
+  &:after {
+    @include round-corner(195px);
+    @include height(550px);
+    @include width(550px);
+    background: $primary;
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: -25px;
+    right: -45px;
+    opacity: 0.25;
+    -webkit-transform: rotate(130deg);
+    transform: rotate(130deg);
+    box-shadow: 0 0 40px rgba($gray-400, 0.5);
+  }
+  
+  &.diagonal-bg-left {
+    &:after {
+      bottom: -25px;
+      left: -45px;
+    }
+  }
+}
+
+.bg-image {
+  background: url('/images/p19.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: $white;
+  position: relative;
+  z-index: 0;
+
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: '';
+    z-index: -1;
+    opacity: .65;
+    background: $primary;
+  }
+}

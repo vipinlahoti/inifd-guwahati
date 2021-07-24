@@ -1,0 +1,113 @@
+.btn {
+  @include margin(16px, bottom);
+  @include padding(4px 20px);
+  @include padding(4px 20px);
+  @include font-size(15px);
+  @include height(40px);
+  @include round-corner(4px);
+  background: $primary;
+  color: $white;
+  border: 0;
+  line-height: 30px;
+  cursor: pointer;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 700;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+  will-change: transform;
+  transition: .3s all ease-in-out;
+  justify-content: center;
+  width: 100%;
+  white-space: nowrap;
+
+  .icon {
+    @include margin(5px, right);
+    max-width: 30px;
+  }
+
+  // .icon-arrow_forward {
+  //   @include margin(-24px, left);
+  //   transition: all 0.3s ease-in-out 0s;
+  //   opacity: 0;
+  // }
+
+  ~.btn {
+    @include breakpoint($screen-sm) {
+      @include margin(15px, left);
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    cursor: default;
+    opacity: .65;
+  }
+
+  &:hover {
+    background: $primary;
+    color: $white;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
+  }
+
+  &.btn-black {
+    background: $dark;
+    border-color: $dark;
+    color: $white; 
+
+    &:focus,
+    &.focus {
+      outline: 0;
+      box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $dark;
+    }
+  }
+
+  &.btn-link {
+    @include margin(0px, bottom);
+    @include padding(4px);
+    background: transparent;
+    color: $primary;
+    text-decoration: underline;
+    height: auto;
+    line-height: 1;
+    width: auto;
+  }
+
+  &.btn-flat {
+    @include padding(5px);
+
+    .icon {
+      @include margin(0px);
+    }
+
+    ~.btn {
+      @include margin(8px, left);
+    }
+  }
+
+  &.btn-none {
+    @include padding(0 8px);
+    border: 0;
+    text-decoration: none;
+    height: auto;
+  }
+
+  @include breakpoint($screen-sm) {
+    @include margin(0px, bottom);
+    width: auto;
+  }
+}
+
+//
+// Block button
+//
+.btn-block {
+  justify-content: center;
+  width: 100%;
+}

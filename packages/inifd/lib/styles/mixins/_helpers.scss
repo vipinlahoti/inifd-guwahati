@@ -1,0 +1,514 @@
+@mixin clearfix($extend: true) {
+  @if $extend {
+    @extend %clearfix;
+  } @else {
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+}
+
+/// Mixin for box sizing
+@mixin box-sizing($args) {
+  -webkit-box-sizing: $args;
+  -moz-box-sizing: $args;
+  box-sizing: $args;
+}
+
+/// Clearfix helper
+/// @requires {mixin} clearfix
+%clearfix {
+  @include clearfix($extend: false);
+}
+
+/// Mixin to size elements.
+/// @param {Number} $width           - Width
+/// @param {Number} $height [$width] - Height
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin breakpoint($class) {
+  @if $class == $screen-xs {
+    @media (max-width: $screen-sm - 1) { @content; }
+  }
+  @else if $class == $screen-sm {
+    @media (min-width: $screen-sm) { @content; }
+  }
+  @else if $class == $screen-md {
+    @media (min-width: $screen-md) { @content; }
+  }
+  @else if $class == $screen-lg {
+    @media (min-width: $screen-lg) { @content; }
+  }
+  @else if $class == $screen-xl {
+    @media (min-width: $screen-xl) { @content; }
+  }
+  @else if $class == $screen-xxl {
+    @media (min-width: $screen-xxl) { @content; }
+  }
+  @else {
+    @warn "Breakpoint mixin supports: xs, sm, md, lg, xl, xxl";
+  }
+}
+
+// Position (vert, hor, center)
+@mixin center($position) {
+  position: absolute;
+
+  @if $position == 'vertical' {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  @else if $position == 'horizontal' {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%);
+  }
+  @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Text Alignment Left, Right, Center
+@mixin text-align($position) {
+  @if $position == 'left' {
+    text-align: left;
+  }
+  @else if $position == 'right' {
+    text-align: right;
+  }
+  @else if $position == 'center' {
+  	text-align: center;
+  }
+}
+
+/// Mixin to round corners
+@mixin round-corner($tl: 5px, $tr: null, $br: null, $bl: null) {
+
+	@if ($tr == null) {	$tr: $tl;	}
+	@if ($br == null) {	$br: $tl;	}
+	@if ($bl == null) {	$bl: $tl;	}
+
+	-webkit-border-radius: $tl $tr $br $bl;
+	-moz-border-radius: $tl $tr $br $bl;
+ 	border-radius: $tl $tr $br $bl;
+
+	/* Prevent background color leak outs */
+	-webkit-background-clip: padding-box;
+	-moz-background-clip:    padding;
+	background-clip:         padding-box;
+}
+
+@function strip-unit( $number ) {
+  @if type-of( $number ) == 'number' and not unitless( $number ) {
+    @return $number / ( $number * 0 + 1 );
+  }
+
+  @return $number;
+}
+
+@mixin px-to-rem($property, $px-values) {
+  // Number of pixels in 1rem (default: 16px/rem)
+  // When converting to rems, we must divide by this ratio.
+  $px-per-rem: $base-font-size / 1rem;
+
+  // Print the pixel fallback declaration first so we can override it in capable browsers.
+  #{$property}: $px-values;
+
+  // If there is only one value, print the declaration with the value converted to rems.
+  @if type-of($px-values) == "number" {
+    #{$property}: $px-values / $px-per-rem;
+  } @else {
+    // Otherwise, we've got a list and we'll need to convert each value in turn.
+    // Create an empty list that we can dump values into.
+    $rem-values: ();
+    @each $value in $px-values {
+      // If the value is zero, a string or a color, leave it be.
+      @if $value == 0 or type-of($value) == "string" or type-of($value) == "color" {
+        $rem-values: append($rem-values, $value);
+      } @else {
+        $rem-values: append($rem-values, $value / $px-per-rem);
+      }
+    }
+    // Print the property and its list of converted values.
+    #{$property}: $rem-values;
+  }
+}
+
+// Adjust the leading to a new multiple of the baseline
+@mixin set-leading($lines) {
+	@include px-to-rem(line-height, $base-line-height * $lines);
+}
+
+// Calculate the number of baselines required to accomodate a
+// given pixel-based font size.
+@function lines-for-font-size($font-size) {
+	$lines: if(
+		$round-to-nearest-half-line,
+		ceil(2 * $font-size / $base-line-height) / 2,
+		ceil($font-size / $base-line-height)
+	);
+	@if $lines * $base-line-height - $font-size < $min-line-padding * 2 {
+		$lines: $lines + if($round-to-nearest-half-line, 0.5, 1);
+	}
+	@return $lines;
+}
+
+@mixin font-size($to-size, $lines: lines-for-font-size($to-size)) {
+  @include px-to-rem(font-size, $to-size);
+  @include px-to-rem(line-height, $to-size * 1.5);
+}
+
+//
+// Calculate Rem
+//
+@function calc-rem( $size: (), $root: $base-font-size ) {
+  $size-root: $root;
+  $size_final: '';
+
+  @for $i from 1 to length($size) + 1 {
+    $n_size: nth( $size, $i ) / $size-root;
+    $size_final: join($size_final, strip-unit( $n_size ) * 1rem);
+  }
+  @return #{$size_final};
+}
+
+
+//
+// Margin
+//
+// calculates margin in 'rem' with 'px' fallback.
+// with the option to set direction, e.g., 'margin-top'
+//
+
+@mixin margin( $size, $dir: null, $important: null) {
+  @if $dir != null {
+    $dir: '-' + $dir;
+  }
+  margin#{$dir}: $size $important;
+  margin#{$dir}: calc-rem($size) $important;
+}
+
+//
+// Padding
+//
+// calculates padding in 'rem' with 'px' fallback.
+// with the option to set direction, e.g., 'padding-top'
+//
+
+@mixin padding( $size, $dir: null, $important: null) {
+  @if $dir != null {
+    $dir: '-' + $dir;
+  }
+  padding#{$dir}: $size $important;
+  padding#{$dir}: calc-rem($size) $important;
+}
+
+//
+// Width Rem
+//
+// calculates width in 'rem' with 'px' fallback.
+//
+
+@mixin width( $width, $type: null ) {
+
+  @if $type == max {
+
+    max-width: $width;
+    max-width: calc-rem( $width );
+
+  } @else if $type == min {
+
+    min-width: $width;
+    min-width: calc-rem( $width );
+
+  } @else {
+
+    width: $width;
+    width: calc-rem( $width );
+
+  }
+
+}
+
+//
+// Height Rem
+//
+// calculates height in 'rem' with 'px' fallback.
+//
+
+@mixin height( $height, $type: null ) {
+
+  @if $type == max {
+
+    max-height: $height;
+    max-height: calc-rem( $height );
+
+  } @else if $type == min {
+
+    min-height: $height;
+    min-height: calc-rem( $height );
+
+  } @else {
+
+    height: $height;
+    height: calc-rem( $height );
+
+  }
+}
+
+@mixin stack-spacing() {
+	// column bottom margin on mobile and collapse component last elem margin
+	& > *:last-child,
+	& > *:last-child > *:last-child,
+	& > *:last-child > *:last-child > *:last-child,
+	& > *:last-child > *:last-child > *:last-child > *:last-child,
+	& > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child,
+	& > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child,
+	& > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child,
+	& > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child > *:last-child, > *:last-child {
+			margin-bottom: 0;
+	}
+}
+
+.mr-0 {
+  margin-right: 0px !important;
+}
+
+.mr-xs {
+  margin-right: 8px !important;
+}
+
+.mr-1 {
+  margin-right: 16px !important;
+}
+
+.mr-2 {
+  margin-right: 32px !important;
+}
+
+.mr-3 {
+  margin-right: 48px !important;
+}
+
+.mr-4 {
+  margin-right: 64px !important;
+}
+
+.mr-5 {
+  margin-right: 64px !important;
+}
+
+.ml-0 {
+  margin-left: 0px !important;
+}
+
+.ml-sm {
+  margin-left: 8px !important;
+}
+
+.ml-1 {
+  margin-left: 16px !important;
+}
+
+.ml-2 {
+  margin-left: 32px !important;
+}
+
+.ml-3 {
+  margin-left: 48px !important;
+}
+
+.ml-4 {
+  margin-left: 64px !important;
+}
+
+.ml-5 {
+  margin-left: 64px !important;
+}
+
+.mt-xs {
+  margin-top: 8px !important;
+}
+
+.mt-1 {
+  margin-top:16px !important;
+}
+
+.mt-2 {
+  margin-top:32px !important;
+}
+
+.mt-3 {
+  margin-top:48px !important;
+}
+
+.mt-4 {
+  margin-top:64px !important;
+}
+
+.mt-5 {
+  margin-top:80px !important;
+}
+
+
+.mb-0 {
+  margin-bottom: 0px !important;
+}
+
+.mb-xs {
+  margin-bottom: 8px !important;
+}
+
+.mb-1 {
+  margin-bottom: 16px !important;
+}
+
+.mb-2 {
+  margin-bottom: 32px !important;
+}
+
+.mb-3 {
+  margin-bottom: 48px !important;
+}
+
+.mb-4 {
+  margin-bottom: 64px !important;
+}
+
+.mb-5 {
+  margin-bottom: 80px !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.p-sm {
+  padding: 8px !important;
+}
+
+.p-1 {
+  padding: 16px !important;
+}
+
+.p-2 {
+  padding: 32px !important;
+}
+
+.pt-1 {
+  padding-top: 16px !important;
+}
+
+.pt-2 {
+  padding-top: 32px !important;
+}
+
+.pt-3 {
+  padding-top: 48px !important;
+}
+
+.pt-4 {
+  padding-top: 64px !important;
+}
+
+.pt-5 {
+  padding-top: 80px !important;
+}
+
+
+.pb-1 {
+  padding-bottom: 16px !important;
+}
+
+.pb-2 {
+  padding-bottom: 32px !important;
+}
+
+.pb-3 {
+  padding-bottom: 48px !important;
+}
+
+.pb-4 {
+  padding-bottom: 64px !important;
+}
+
+.pb-5 {
+  padding-bottom: 80px !important;
+}
+
+.pl-0 {
+  padding-left: 0px !important;
+}
+
+.pl-1 {
+  padding-left: 16px !important;
+}
+
+.pl-2 {
+  padding-left: 32px !important;
+}
+
+.pl-3 {
+  padding-left: 48px !important;
+}
+
+.pl-4 {
+  padding-left: 64px !important;
+}
+
+.pl-5 {
+  padding-left: 80px !important;
+}
+
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+
+.pr-1 {
+  padding-right: 16px !important;
+}
+
+.pr-2 {
+  padding-right: 32px !important;
+}
+
+.pr-3 {
+  padding-right: 48px !important;
+}
+
+.pr-4 {
+  padding-right: 64px !important;
+}
+
+.pr-5 {
+  padding-right: 80px !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}

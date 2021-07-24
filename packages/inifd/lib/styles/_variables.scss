@@ -1,0 +1,107 @@
+// Color system
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #221e1f !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #1c1f21 !default;
+$black:    #000 !default;
+
+$blue:    #5e72e4 !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #f96359 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$copy-blue: #0069ff !default;
+$sweet-blue: #c8eeff !default;
+$sweet-pink: #ffaeae !default;
+$sweet-purple: #adc1ff !default;
+$sweet-yellow: #feffe0 !default;
+
+
+// $primary:       #00b259 !default;
+$primary:       #ee1a23 !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $black !default;
+
+$highlight: $primary !default;
+
+$text-color: $dark;
+
+$rhythm-font-unit: px !default;
+$round-to-nearest-half-line: true !default;
+$min-line-padding: 2px !default;
+
+$base-font-size: 16px;
+$base-line-height: 24px !default;
+$font-weight-base: 400 !default;
+$line-height-base: 1.5 !default;
+
+$base-font-family:      'Nunito', sans-serif !default;
+$brand-font-family:     'Poppins', sans-serif !default;
+
+// BREAKPOINTS
+$screen-xs:	23.4375em;// 375px
+$screen-sm:	48em; 		// 768px
+$screen-md:	62em; 		// 992px
+$screen-lg:	75em; 		// 1200px
+// $screen-xl:	100em; 		// 1600px
+// $screen-xxl:	120em; 		// 1920px
+
+
+// CONTENT CONTAINER
+$container-xs: 312px; // 312px
+$container-sm: 704px; // 704px
+$container-md: 928px; // 928px
+$container-lg: 1120px;	// 1120px
+// $container-xl: 1408px; // 1408px
+
+
+// Grid
+$grid-columns: 12 !default; // Set number of columns in the grid
+
+$xs-max: 40rem !default; // Set xs breakpoint's max width
+$sm-max: 64rem !default; // Set sm breakpoint's max width
+$md-max: 90rem !default; // Set md breakpoint's max width
+$lg-max: 120rem !default; // Set lg breakpoint's max width
+
+$gutter: 1rem !default; // Set gutter size
+
+$content-well-max-width: "none" !default; // Set the max-width of the content well
+
+$sm-start: ($xs-max + 1); // Generate sm breakpoint's min width
+$md-start: ($sm-max + 1); // Generate md breakpoint's min width
+$lg-start: ($md-max + 1); // Generate lg breakpoint's min width
+$xl-start: ($lg-max + 1); // Generate xl breakpoint's min width
+
+// Breakpoints
+// Create breakpoint range statements to be used in media queries
+$breakpoint-xs-only: "only screen and (max-width: #{$xs-max})"; // 0 -> xs-max range
+$breakpoint-sm-up: "only screen and (min-width: #{$sm-start})"; // sm-start -> up range
+$breakpoint-sm-only: "only screen and (min-width: #{$sm-start}) and (max-width: #{$sm-max})"; // sm-start -> sm-max range
+$breakpoint-md-up: "only screen and (min-width: #{$md-start})"; // md-start -> up range
+$breakpoint-md-only: "only screen and (min-width: #{$md-start}) and (max-width: #{$md-max})"; // md-start -> md-max range
+$breakpoint-lg-up: "only screen and (min-width: #{$lg-start})"; // lg-start -> up range
+$breakpoint-lg-only: "only screen and (min-width: #{$lg-start}) and (max-width: #{$lg-max})"; // lg-start -> lg-max range
+$breakpoint-xl-up: "only screen and (min-width: #{$xl-start})"; // xl-start -> up range
+
+$breakpoints-all: ($breakpoint-xs-only, $breakpoint-sm-up, $breakpoint-sm-only, $breakpoint-md-up, $breakpoint-md-only, $breakpoint-lg-up, $breakpoint-lg-only, $breakpoint-xl-up);
+$breakpoint-ups: ($breakpoint-sm-up, $breakpoint-md-up, $breakpoint-lg-up, $breakpoint-xl-up);
+$breakpoint-all-prefixes: ("xs", "xs-only", "sm", "sm-only", "md", "md-only", "lg", "lg-only", "xl");
+$breakpoint-up-prefixes: ("xs", "sm", "md", "lg", "xl");

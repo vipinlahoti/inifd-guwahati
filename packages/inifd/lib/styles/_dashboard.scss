@@ -1,0 +1,78 @@
+.instances__list {
+  table {
+    tbody {
+      tr {
+        border-left: 5px solid transparent;
+        transition: .3s all ease-in-out;
+
+        &:hover {
+          border-left: 3px solid $primary;
+        }
+      }
+    }
+  }
+
+  &.instances__list-dashboard {
+    thead {
+      // display: none;
+    }
+  }
+}
+
+.instance-status {
+  @include size(12px);
+  @include round-corner(10px);
+  @include margin(8px, right);
+  display: flex;
+}
+
+@keyframes progress-bar-stripes {
+  0% { background-position-x: 1rem; }
+}
+
+.progress {
+  @include height(20px);
+  background: $gray-200;
+
+  .progress-fill {
+    @include height(20px);
+    background: $primary;
+    transition: width 1s;
+  }
+
+  &.progress-small {
+    @include height(10px);
+
+    .progress-fill {
+      @include height(10px);
+      transition: width 1s;
+    }
+  }
+
+  &.progress-animate {
+    .progress-fill {
+      -webkit-animation: progress-bar-stripes 1s linear infinite;
+      animation: progress-bar-stripes 1s linear infinite;
+      background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+      background-size: 1rem 1rem;
+      transition: width 1s;
+
+      &.progress-fill {
+        -webkit-animation: progress-bar-stripes 0.2s linear infinite;
+        animation: progress-bar-stripes 0.2s linear infinite;
+      }
+    }
+  }
+}
+
+.support__close {
+  color: $gray-600;
+
+  a {
+    color: $gray-600;
+  }
+}
+
+.datatable-above-right {
+  @include margin(16px, left);
+}

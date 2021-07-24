@@ -1,0 +1,540 @@
+.fade {
+  transition: opacity .15s linear;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.icon-arrow_forward {
+  @include font-size(20px);
+}
+
+.icon {
+  line-height: inherit;
+}
+
+.copyright {
+  @include font-size(16px);
+
+  @include breakpoint($screen-md) {
+    @include font-size(14px);
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px solid $gray-200;
+}
+
+.users-name {
+  font-weight: 600;
+}
+
+.price-summary {
+  @include padding(16px, left);
+  @include width(310px, max);
+  position: sticky;
+  top: 0;
+
+  p {
+    @include font-size(14px);
+    color: $gray-700;
+  }
+}
+
+.list-price {
+  @include font-size(18px);
+  @include margin(5px, top);
+  color: $gray-600;
+}
+
+.price-strike {
+  text-decoration: line-through;
+}
+
+.sale-price {
+  color: $primary;
+}
+
+footer,
+.footer {
+  @extend .bg-dark;
+  // @extend .text-white;
+
+  .nav-link {
+    @include font-size(16px);
+    @include margin(16px, left);
+    @include margin(16px, right);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:first-child {
+      @include margin(0, left);
+    }
+  }
+
+  a {
+    @extend .text-white;
+    text-decoration: underline;
+
+    &:hover {
+      // @extend .text-white;
+    }
+  }
+
+  .navbar-brand {
+    @extend .text-white;
+    border-color: $white;
+    text-decoration: none;
+
+    &:hover {
+      @extend .text-white;
+    }
+  }
+
+  .list {
+    li:before{
+      background-color: $white;
+    }
+  }
+
+  .social-connect {
+    @include margin(12px, right);
+    @include size(32px);
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.disclaimers {
+  @include font-size(14px);
+}
+
+
+.line-height-lg {
+  .title-5 {
+    line-height: 55px;
+  }
+}
+
+.market-list {
+  .list-group-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+.footer-right {
+  @include margin(32px, top);
+  text-align: left;
+
+  @include breakpoint($screen-md) {
+    @include margin(0px, top);
+    text-align: right;    
+  }
+}
+
+.blog-title {
+  line-height: 28px;
+
+  a {
+    color: $dark;
+  }
+}
+
+.posts-thumbnail {
+  width: 100%;
+}
+
+.newsletter-form {
+  .fieldset {
+    @extend .form-inline;
+  }
+}
+
+.comments-new-form {
+  .document-new-comment {
+    flex: 1;
+    text-align: left;
+  }
+}
+
+.datatable-item-user {
+  .contents-user {
+    @extend .d-flex;
+  }
+
+  .avatar {
+    @include margin(8px, right);
+  }
+
+  .avatar-image {
+    @include size(30px);
+  }
+}
+
+.datatable-edit {
+  .btn {
+    @include height(35px);
+    line-height: 20px;
+  }
+}
+
+.cell-contents {
+  .contents-array {
+    @include padding(8px, left);
+  }
+}
+
+.current-active {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.courses-list {
+  .dropdown-item {
+    @include margin(16px, bottom);
+    color: $dark;
+    display: block;
+
+    &.active,
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.error-page {
+  @include font-size(160px);
+}
+
+.tabpanel-list {
+  img {
+    @include margin(8px, bottom);
+    @include size(65px);
+  }
+
+  .icon {
+    @include font-size(80px);
+    line-height: 70px;
+  }
+}
+
+.full__gallery {
+  overflow: hidden;
+  @include margin(0px);
+
+  .col-md-3 {
+    @include padding(0px);
+  }
+
+  img {
+    display: flex;
+    width: 100%;
+  }
+
+  .full__gallery-item {
+    @include height(235px, max);
+    overflow: hidden;
+  }
+}
+
+.testimonial__list {
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+  position: relative;
+
+  &:before {
+    @include font-size(250px);
+    content: '“';
+    position: absolute;
+    top: -120px;
+    opacity: .15;
+    left: 0px;
+  }
+}
+
+.carousel__list {
+  list-style: none;
+
+  .carousel__list-item {
+    @include font-size(18px);
+    display: flex;
+    font-weight: 400;
+    margin-bottom: 0;
+    color: $dark;
+
+    .name {
+      @include margin(8px, bottom);
+    }
+
+    .position {
+      @include font-size(14px);
+      color: $primary;
+    }
+  }
+
+  .carousel__list-item-avatar {
+    @include margin(16px, right);
+    img {
+      @include size(120px);
+      border-radius: 50%;
+      position: relative;
+    }
+  }
+
+  .react-multi-carousel-list {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .react-multi-carousel-track {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform,transition;
+  }
+
+  .react-multi-carousel-item {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  .react-multi-carousel-dot-list {
+    @include padding(0);
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    text-align: center;
+
+    button {
+      @include margin(8px, right);
+      @include padding(4px);
+      @include size(5px);
+      display: inline-block;
+      border-radius: 50%;
+      opacity: 1;
+      transition: background .5s;
+      border: 1px solid $gray-300;
+      outline: 0;
+      cursor: pointer;
+    }
+  }
+
+  .react-multi-carousel-dot--active {
+    button {
+      background: $primary;
+      border-color: $primary;
+    }
+  }
+}
+
+.count {
+  @include font-size(48px); 
+  display: block;
+}
+
+.blog__list-date {
+  @include margin(5px, top);
+  @include padding(5px);
+  @include width(75px, min);
+  border: 2px solid $primary;
+  color: $primary;
+  font-weight: 600;
+
+  span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  &.blog__list-date--past {
+    border-color: $dark;
+    color: $dark;
+  }
+}
+
+.blog-link {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.img-overlay {
+  position: relative;
+  z-index: 0;
+
+  &:after {
+    content: '';
+    background: rgba($dark, .25);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+  }
+}
+
+.request__wrapper { 
+  bottom: 0;
+  position: fixed;
+  right: 0;
+  transition: .3s all ease-in-out;
+  width: 100%;
+  z-index: 999;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .btn {
+    margin: 0;
+    // padding: 16px;
+    // height: 50px;
+    border-radius: 0;
+  }
+
+  @include breakpoint($screen-md) {
+    bottom: 1rem;
+    right: 1rem;
+    opacity: .85;
+    width: auto;
+
+    .btn {
+      @include round-corner(4px);
+    }
+  }
+}
+
+.datatable-item-title {
+  max-width: 600px;
+}
+
+
+.iframe-container {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.iframe-container iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.corporate__section {
+  img {
+    @include margin(0 10px);
+    @include width(100px, max);
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    transition: .3s all ease-in-out;
+
+    &:hover {
+      -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+      filter: grayscale(0%);
+    }
+  }
+}
+
+.mentor-item {
+  @include margin(0 16px);
+  flex-direction: column;
+
+  img {
+    max-width: 260px;
+  }
+}
+
+.mentors-avatar {
+  @include margin(10px, top);
+  @include width(175px);
+}
+
+.section__corporates {
+  .corporate__section {
+    img {
+      // @include width(220px);     
+      @include width(210px, max);
+    }
+  }
+}
+
+.image-wrapper {
+  display: block;
+  overflow: hidden;
+  position: relative;
+
+  .image-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    height: 265px;
+    transition: all .5s;
+    width: 100%;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  .title-5,
+  .title-6 {
+    @include margin(0px);    
+    @include padding(0 8px);    
+    background: $primary;
+    border-left: 5px solid $white;
+    bottom: 5px;
+    color: $white;
+    display: inline-block;
+    left: 5px;
+    position: absolute;
+    z-index: 9;
+  }
+}
+
+.header-phone {
+  @include width(150px, max);
+}
+
+.datatable-header-cell-label {
+  @include width(130px);
+  white-space: nowrap;
+}
+
+.datacard-label {
+  @include width(200px);  
+}

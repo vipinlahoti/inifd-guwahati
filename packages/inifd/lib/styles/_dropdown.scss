@@ -1,0 +1,92 @@
+.dropdown {
+  position: relative;
+
+  .dropdown-menu {
+    @include width(200px, min);
+    @include padding(8px, bottom);
+    @include margin(2px 0px);
+    @include round-corner(3px);
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    list-style: none;
+    box-shadow: 0px 10px 15px rgba($dark, 0.075);
+    transition: transform .3s ease;
+  
+    &.show {
+      background: $white;
+      display: block;
+      left: -80px;
+
+      &:before {
+        z-index: -1;
+        content: "";
+        width: 0;
+        height: 0;
+        border-color: transparent transparent #fff;
+        border-style: solid;
+        border-width: 0 8px 8px;
+        position: absolute;
+        top: -8px;
+        display: block;
+        left: 45%;
+        
+      }
+    }
+  }
+
+  .dropdown-item {
+    @include padding(4px 16px);
+    color: $dark;
+    font-weight: 600;
+    display: block;
+    width: 100%;
+    clear: both;
+    font-weight: 400;
+    text-align: inherit;
+    white-space: nowrap;
+    transition: .3s all ease-in-out;
+
+    &:hover,
+    &.active {
+      color: $primary;
+    }
+  }
+}
+
+.dropdown-toggle {
+  &::after {
+    @include margin(4px, left);
+    border-top: 5px solid;
+    border-right: 5px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-left: 5px solid transparent;
+    display: inline-block;
+    content: "";
+  }
+
+  &.btn-none {
+    @include padding(0);
+    white-space: nowrap;
+    border: 0;
+    background: transparent;
+    height: auto;
+
+    &::after {
+      @include margin(15px, top);
+      border-top-color: $white;
+    }
+  }
+
+  &a {
+    color: red;
+  }
+}
+
+.dropdown-divider {
+  @include margin(4px 0);
+  height: 0;
+  overflow: hidden;
+  border-top: 1px solid $gray-300;
+}

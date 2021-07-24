@@ -1,0 +1,323 @@
+textarea {
+  @include height(200px, min);
+  @include margin(16px, bottom);
+  border: 1px solid $gray-300;
+  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.12), 0 1px 0 rgba(0, 0, 0, 0.02);
+  width: 100%
+}
+
+fieldset,
+.fieldset {
+  @include padding(0);
+  border: 0;
+  outline: 0;
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @include breakpoint($screen-md) {
+    justify-content: flex-start;
+  }
+
+  @include breakpoint($screen-sm) {
+    flex-direction: row;
+  }
+
+  .form-control {
+    @include width(260px, min);
+  }
+
+  .form-group {
+    @include margin(0, right);
+    @include margin(16px, bottom);
+    width: 100%;
+
+    @include breakpoint($screen-sm) {
+      @include margin(8px, right);
+      @include margin(0, bottom);
+      width: auto;
+    }
+  }
+}
+
+.form-group {
+  @include margin(16px, bottom);
+}
+
+label {
+  @include margin(8px, bottom);
+  display: inline-block;
+
+  &:disabled {
+    .list-group-item {
+      cursor: default;
+      opacity: .65;
+    }
+  }
+}
+
+.form-control,
+.PhoneInputInput {
+  @include height(55px);
+  @include padding(4px 16px);
+  @include font-size(16px);
+  @extend .font-weight-normal;
+  display: block;
+  width: 100%;
+  color: $dark;
+  background-color: $white;
+  background-clip: padding-box;
+  border: 1px solid $gray-300;
+  font-family: inherit;
+  // box-shadow: 0 1px 3px rgba(50, 50, 93, .12), 0 1px 0 rgba(0,0,0,.02);
+
+  &::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+
+  // Remove select outline from select box in FF
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 $gray-400;
+  }
+
+  &:focus,
+  &:active {
+    border-color: $gray-500;
+    outline: none;
+  }
+
+  &:disabled {
+    background: $gray-200;
+  }
+}
+
+.custom-checkbox {
+  display: flex;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    
+    ~ .check {
+      @include margin(10px, right);
+      @include size(25px, 25px);
+      border: 3px solid $gray-500;
+      position: relative;
+    }
+
+    &:checked {
+      ~ .check {
+        background: $primary;
+        border-color: $primary;
+
+        &:after {
+          @include size(8px, 15px);
+          content: '';
+          position: absolute;
+          left: 5px;
+          top: 0px;
+          border-right: 3px solid $white;
+          border-bottom: 3px solid $white;
+          -ms-transform: rotate(45deg); /* IE 9 */
+          -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+
+  ~ .form-text {
+    @include margin(35px, left);
+    display: flex;
+  }
+}
+
+.required-field {
+  @include margin(5px, left);
+  @include font-size(12px);
+  color: $gray-600;
+  font-style: italic;
+}
+
+.form-control-range {
+  width: 100%;
+}
+
+.custom-switch {
+  @include padding(40px, left);
+
+  .custom-control-input {
+    @include size(16px, 16px);
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+
+    &:checked {
+      ~ .custom-control-label {
+        &:before {
+          color: $white;
+          border-color: $primary;
+          background-color: $primary;
+        }
+
+        &:after {
+          background-color: $white;
+          transform: translateX(.75rem);
+        }
+      }
+    }
+  }
+
+  .custom-control-label {
+    @include margin(0, bottom)
+    position: relative;
+    vertical-align: top;
+
+    &:after,
+    &:before {
+      @include size(18px, 18px);
+      position: absolute;
+      top: .25rem;
+      left: -1.5rem;
+      display: block;
+      content: '';
+    }
+
+    &:before {
+      @include width(32px);
+      @include round-corner(10px);
+      background-color: $white;
+      border: 1px solid $gray-600;
+      left: -40px;
+      pointer-events: all;
+      transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    &:after {
+      background: no-repeat 50%/50% 50%;
+      top: calc(.25rem + 2px);
+      left: -36px;
+      width: calc(1rem - 2px);
+      height: calc(1rem - 2px);
+      background-color: $gray-600;
+      border-radius: .5rem;
+      transition: transform .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+  }
+}
+
+.theme-selection {
+  display: flex;
+}
+
+.theme-check {
+  .list-group-item {
+    display: flex;
+    justify-content: center;
+  }
+
+  .admin-checkbox {
+    @include margin(16px, right);
+  }
+
+  .list-group-item {
+    @include size(120px, 80px);
+    @include font-size(14px);
+
+    @include breakpoint($screen-sm) {
+      @include size(180px, 100px);
+    }
+
+    .admin-card-description {
+      color: $gray-600;
+      width: 100%;
+    }
+
+    &.dark-mode {
+      background: $dark;
+      color: $white;
+    }
+  }
+}
+
+.form-input {
+  position: relative;
+
+  .form-control-limit {
+    color: $gray-500;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .form-component-clear {
+    background: transparent;
+    border: 0;
+    position: absolute;
+    right: 25px;
+    top: 50px;
+  }
+}
+
+.form-section-heading {
+  cursor: pointer;
+  position: relative;
+}
+
+.form-section-heading-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.form-section-collapsed {
+  display: none;
+}
+
+.form-input-errors {
+  @include font-size(12px);
+  @include margin(16px, bottom);
+  color: $danger;
+}
+
+.accounts-ui {
+  .message {
+    @include font-size(14px);
+    @include margin(8px, top);
+    color: $danger;
+
+    &.warning {
+      color: $danger;
+    }
+  }
+
+  .btn-primary-fill {
+    @extend .btn-block;
+  }
+}
+
+.upload-field {
+  display: flex;
+
+  .upload-state {
+    // @include margin(16px, left);
+  }
+}
+
+.document-new-post {
+  .form-component-textarea {
+    textarea {
+      @include height(600px, min);
+    }
+  }
+}

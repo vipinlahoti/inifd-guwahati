@@ -1,0 +1,122 @@
+//
+// Headings
+//
+$h1-font-size: 56px;
+$h2-font-size: 48px;
+$h3-font-size: 36px;
+$h4-font-size: 32px;
+$h5-font-size: 22px;
+$h6-font-size: 16px;
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.title-1, .title-2, .title-3, .title-4, .title-5, .title-6 {
+	@include margin(0);
+	font-family: $brand-font-family;
+  font-weight: 500;
+  line-height: inherit;
+}
+
+h1,
+.h1,
+.title-1 {
+	@include font-size($h4-font-size);
+  @include margin(18px, bottom);
+  line-height: 45px;
+
+  @include breakpoint($screen-md) {
+    @include font-size($h1-font-size);
+    @include margin(32px, bottom);
+    line-height: 68px;
+  }
+}
+
+h2,
+.h2,
+.title-2 {
+  @include margin(16px, bottom);
+	@include font-size($h4-font-size);
+  line-height: 45px;
+
+  @include breakpoint($screen-md) {
+    @include font-size($h2-font-size);
+    line-height: 60px;
+  }
+}
+
+h3,
+.h3,
+.title-3 {
+	@include margin(16px, bottom);
+  @include font-size($h4-font-size);
+
+  @include breakpoint($screen-md) {
+    @include font-size($h3-font-size);
+  }
+}
+
+h4,
+.h4,
+.title-4 {
+  @include margin(16px, bottom);
+	@include font-size($h4-font-size);
+}
+
+h5,
+.h5,
+.title-5 {
+  @include margin(8px, bottom);
+	@include font-size($h5-font-size);
+}
+
+h6,
+.h6,
+.title-6 {
+  @include margin(8px, bottom);
+	@include font-size($h6-font-size);
+  font-weight: 600;
+}
+
+.title-1 .block,
+.title-2 .block,
+.title-3 .block,
+.title-4 .block,
+.title-5 .block {
+	display: block;
+  font-weight: 300;
+}
+
+p {
+  @include margin(0, top);
+  @include margin(16px, bottom);
+	font-weight: 400;
+}
+
+.lead {
+	@include font-size(21px);
+	font-weight: 300;
+}
+
+.card-text {
+	@include font-size(18px);
+}
+
+.text-data {
+  .h1, .h2, .h3 {
+    @include font-size($h5-font-size);
+    @include margin(16px, bottom);
+    @include margin(32px, top);
+    display: block;   
+  }
+}
+
+.text-small {
+  @include font-size(14px);
+}
+
+.eyebrow {
+  @include font-size(16px);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
